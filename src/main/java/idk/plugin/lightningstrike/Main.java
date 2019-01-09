@@ -38,14 +38,18 @@ public class Main extends PluginBase implements Listener {
         pk.entityUniqueId = cn.nukkit.entity.Entity.entityCount++;
         pk.entityRuntimeId = cn.nukkit.entity.Entity.entityCount++;
         pk.type = 93;
-        pk.x = (float)p.getX();
-        pk.y = (float)p.getY();
-        pk.z = (float)p.getZ();
+        pk.x = (float) p.getX();
+        pk.y = (float) p.getY();
+        pk.z = (float) p.getZ();
         pk.speedX = 0.0f;
         pk.speedY = 0.0f;
         pk.speedZ = 0.0f;
-        pk.yaw = (float)p.getYaw();
-        pk.pitch = (float)p.getPitch();
-        Server.broadcastPacket((Player[])((Player[])p.getLevel().getPlayers().values().stream().toArray(x$0 -> new Player[x$0])), (DataPacket)pk);
+        pk.yaw = (float) p.getYaw();
+        pk.pitch = (float) p.getPitch();
+        try {
+			Class.forName("cn.nukkit.utils.EntityUtils");
+			pk.protocol = p.protocol;
+		} catch (Exception e) {}
+        Server.broadcastPacket((Player[])((Player[]) p.getLevel().getPlayers().values().stream().toArray(x$0 -> new Player[x$0])), (DataPacket) pk);
     }
 }
