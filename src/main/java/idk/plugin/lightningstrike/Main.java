@@ -1,14 +1,12 @@
 package idk.plugin.lightningstrike;
 
 import cn.nukkit.Player;
-import cn.nukkit.Server;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.network.protocol.AddEntityPacket;
-import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.plugin.PluginBase;
 
 public class Main extends PluginBase implements Listener {
@@ -46,10 +44,13 @@ public class Main extends PluginBase implements Listener {
         pk.speedZ = 0.0f;
         pk.yaw = (float) p.getYaw();
         pk.pitch = (float) p.getPitch();
-        try {
-			Class.forName("cn.nukkit.utils.EntityUtils");
-			pk.protocol = p.protocol;
-		} catch (Exception e) {}
-        Server.broadcastPacket((Player[])((Player[]) p.getLevel().getPlayers().values().stream().toArray(x$0 -> new Player[x$0])), (DataPacket) pk);
+
+        for (Player pl : p.getLevel().getPlayers().values()) {
+            try {
+                Class.forName("cn.nukkit.utils.EntityUtils");
+                pk.protocol = pl.protocol;
+            } catch (Exception e) {}
+            pl.dataPacket(pk);
+        }
     }
 }
