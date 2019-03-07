@@ -46,10 +46,6 @@ public class Main extends PluginBase implements Listener {
         pk.pitch = (float) p.getPitch();
 
         for (Player pl : p.getLevel().getPlayers().values()) {
-            try {
-                Class.forName("cn.nukkit.utils.EntityUtils");
-                pk.protocol = pl.protocol;
-            } catch (Exception e) {}
             pl.dataPacket(pk);
         }
     }
