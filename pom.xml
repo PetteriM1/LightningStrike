@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>idk.plugin.lightningstrike</groupId>
+    <groupId>me.petterim1.lightningstrike</groupId>
     <artifactId>LightningStrike</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <build>
         <defaultGoal>install</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -27,19 +27,23 @@
                 <filtering>true</filtering>
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
-                    <include>plugin.yml</include>
+                    <include>*.yml</include>
                 </includes>
             </resource>
         </resources>
     </build>
-     <dependencies>
-         <dependency>
-             <groupId>cn.nukkit</groupId>
-             <artifactId>Nukkit</artifactId>
-             <version>SuomiCraftPE</version>
-             <optional>false</optional>
-             <scope>system</scope>
-             <systemPath>${basedir}/lib/Nukkit-SuomiCraftPE.jar</systemPath>
-         </dependency>
-     </dependencies>
+    <repositories>
+        <repository>
+            <id>nukkitx</id>
+            <url>https://repo.nukkitx.com/main/</url>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>cn.nukkit</groupId>
+            <artifactId>nukkit</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
